@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>MindMatrix - Home</title>
+		<style>
+			:root {
+				--blue-900: #0f2dbd;
+				--blue-800: #1541e6;
+				--blue-700: #1f57ff;
+				--blue-600: #2c6dff;
+				--blue-200: #9bd4ff;
+				--text-dark: #1f2a44;
+				--text-muted: #6b7a90;
+				--white: #ffffff;
+				--shadow-lg: 0 18px 40px rgba(18, 45, 120, 0.25);
+				--shadow-md: 0 10px 24px rgba(18, 45, 120, 0.2);
+			}
+
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+				font-family: "Segoe UI", "Inter", system-ui, -apple-system, sans-serif;
+			}
+
+			body {
+				background-color: #f5f7ff;
+				color: var(--text-dark);
+				min-height: 100vh;
+			}
+
+			a {
+				text-decoration: none;
+				color: inherit;
+			}
+
+			.page {
+				width: 100%;
+			}
+
+			.navbar {
+				position: sticky;
+				top: 0;
+				background: var(--white);
+				z-index: 10;
+				box-shadow: 0 1px 0 rgba(18, 45, 120, 0.08);
+			}
+
+			.navbar-inner {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 18px 24px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 24px;
+			}
+
+			.logo {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				font-weight: 700;
+				color: #1f7c8b;
+				font-size: 22px;
+			}
+
+			.logo-mark {
+				width: 36px;
+				height: 36px;
+				border-radius: 50%;
+				border: 3px solid #1f7c8b;
+				position: relative;
+			}
+
+			.logo-mark::before,
+			.logo-mark::after {
+				content: "";
+				position: absolute;
+				border-radius: 50%;
+				border: 3px solid rgba(31, 124, 139, 0.4);
+				inset: -7px;
+			}
+
+			.logo-mark::after {
+				inset: -14px;
+				border-color: rgba(31, 124, 139, 0.2);
+			}
+
+			.nav-links {
+				display: flex;
+				align-items: center;
+				gap: 22px;
+				font-weight: 600;
+				color: #3f4b61;
+			}
+
+			.nav-links a.active {
+				color: var(--blue-700);
+			}
+
+			.dropdown {
+				display: flex;
+				align-items: center;
+				gap: 6px;
+			}
+
+			.nav-cta {
+				background: var(--blue-700);
+				color: var(--white);
+				padding: 10px 20px;
+				border-radius: 12px;
+				font-weight: 600;
+				box-shadow: var(--shadow-md);
+			}
+
+			.hero {
+				background: linear-gradient(160deg, #1552ff 0%, #1749dc 45%, #1237b3 100%);
+				padding: 70px 0 90px;
+				color: var(--white);
+			}
+
+			.hero-inner {
+				max-width: 1200px;
+				margin: 0 auto;
+				padding: 0 24px;
+				display: grid;
+				grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+				gap: 40px;
+				align-items: center;
+			}
+
+			.pill {
+				display: inline-flex;
+				align-items: center;
+				padding: 8px 18px;
+				border-radius: 999px;
+				background: rgba(255, 255, 255, 0.15);
+				border: 1px solid rgba(255, 255, 255, 0.25);
+				font-weight: 600;
+				font-size: 14px;
+				margin-bottom: 22px;
+			}
+
+			.hero h1 {
+				font-size: clamp(40px, 5vw, 64px);
+				line-height: 1.05;
+				margin-bottom: 20px;
+				letter-spacing: -0.5px;
+			}
+
+			.hero h1 span {
+				color: #84d9ff;
+			}
+
+			.hero p {
+				font-size: 18px;
+				line-height: 1.65;
+				color: rgba(255, 255, 255, 0.88);
+				max-width: 520px;
+			}
+
+			.hero-card {
+				background: rgba(255, 255, 255, 0.12);
+				border-radius: 26px;
+				padding: 22px;
+				box-shadow: var(--shadow-lg);
+				border: 1px solid rgba(255, 255, 255, 0.2);
+			}
+
+			.hero-image {
+				background: rgba(255, 255, 255, 0.12);
+				border-radius: 18px;
+				overflow: hidden;
+				border: 6px solid rgba(255, 255, 255, 0.12);
+				aspect-ratio: 4 / 3;
+				position: relative;
+			}
+
+			.image-placeholder {
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(120deg, #dfe8ff 0%, #f3f6ff 45%, #cbd8ff 100%);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #5b6c8c;
+				font-weight: 600;
+				font-size: 18px;
+			}
+
+			.carousel-indicator {
+				position: absolute;
+				bottom: 18px;
+				right: 24px;
+				width: 46px;
+				height: 6px;
+				border-radius: 999px;
+				background: rgba(255, 255, 255, 0.4);
+			}
+
+			.chat-bubble {
+				position: fixed;
+				right: 24px;
+				bottom: 24px;
+				width: 56px;
+				height: 56px;
+				border-radius: 50%;
+				background: #0d8bff;
+				box-shadow: var(--shadow-lg);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: var(--white);
+				font-size: 24px;
+			}
+
+			@media (max-width: 1024px) {
+				.nav-links {
+					display: none;
+				}
+			}
+
+			@media (max-width: 900px) {
+				.hero-inner {
+					grid-template-columns: 1fr;
+				}
+
+				.hero-card {
+					max-width: 640px;
+				}
+			}
+
+			@media (max-width: 600px) {
+				.navbar-inner {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+
+				.nav-cta {
+					align-self: stretch;
+					text-align: center;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<header class="navbar">
+				<div class="navbar-inner">
+					<div class="logo">
+						<span class="logo-mark"></span>
+						<span>MindMatrix</span>
+					</div>
+					<nav class="nav-links">
+						<a class="active" href="#">Home</a>
+						<a href="#">About Us</a>
+						<a href="#">Programs</a>
+						<a href="#">Collaborations</a>
+						<a href="#">Contact Us</a>
+						<div class="dropdown">
+							<span>Consumer Policy</span>
+							<span>▼</span>
+						</div>
+					</nav>
+					<a class="nav-cta" href="#">Register / Login</a>
+				</div>
+			</header>
+
+			<section class="hero">
+				<div class="hero-inner">
+					<div>
+						<div class="pill">Transforming Education for the AI Era</div>
+						<h1>
+							Empowering<br />
+							Students to<br />
+							<span>Shape the Future</span>
+						</h1>
+						<p>
+							We create industry-ready professionals through AI-powered learning,
+							hands-on experience, and direct pathways to meaningful careers.
+						</p>
+					</div>
+					<div class="hero-card">
+						<div class="hero-image">
+							<div class="image-placeholder">Campus learning space</div>
+							<div class="carousel-indicator"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<button class="chat-bubble" aria-label="Chat">
+			💬
+		</button>
+	</body>
+</html>
