@@ -10,8 +10,8 @@ setServers(["8.8.8.8", "1.1.1.1"]);
 
 
 
-dotenv.config();
 
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,3 +29,4 @@ mongoose.connect(process.env.MONGO_URL)
   .catch((error) => {
     console.error('MongoDB connection failed:', error);
   });
+  
